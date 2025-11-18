@@ -3,11 +3,29 @@ import Logo from "../Logo/Logo";
 import { NavLink } from "react-router";
 
 const Navbar = () => {
-  const links = <>
-      <li><NavLink to={'/services'}>Srvices</NavLink></li>
-      <li><NavLink>Aboute</NavLink></li>
-      
-  </>;
+  const links = (
+    <>
+      <li>
+        <NavLink to={"/services"}>Srvices</NavLink>
+      </li>
+      <li>
+        <NavLink>Aboute</NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/coverage"
+          className={
+            ({ isActive }) =>
+              isActive
+                ? " underline" // Active link style
+                : "block px-4 py-2 text-black rounded hover:bg-gray-200" // Normal style
+          }
+        >
+          Coverage
+        </NavLink>
+      </li>
+    </>
+  );
 
   return (
     <div>
@@ -38,14 +56,12 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a class="btn btn-ghost text-xl">
+          <a class="text-xl">
             <Logo />
           </a>
         </div>
         <div class="navbar-center hidden lg:flex">
-          <ul class="menu menu-horizontal gap-4 px-1">
-           {links}
-          </ul>
+          <ul class="menu menu-horizontal gap-4 px-1">{links}</ul>
         </div>
         <div class="navbar-end">
           <a class="btn">Button</a>
