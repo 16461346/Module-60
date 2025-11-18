@@ -9,8 +9,8 @@ const Review = ({ reviewPromise }) => {
   return (
     <div>
       <div className="text-center">
-        <h1 className="text-3xl text-center">Reviews</h1>
-        <p>
+        <h1 className="text-3xl text-center font-bold text-secondary">Reviews</h1>
+        <p className="w-[50%] leading-5 pt-2  mx-auto">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi,
           quibusdam. Unde hic nemo veniam soluta similique, corrupti quia ea
           sequi.
