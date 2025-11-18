@@ -9,29 +9,57 @@ import { FaArrowCircleUp } from "react-icons/fa";
 const Banar = () => {
   return (
     <div>
-      <Carousel>
+      <Carousel
+        autoPlay
+        infiniteLoop
+        interval={3000}
+        showThumbs={false}
+        showStatus={false}
+      >
         <div className="relative">
           <img src={banner1} />
           <div className="bottom-20 flex gap-6 absolute left-20">
             <div className="flex items-center">
               {" "}
-              <button className="bg-primary   btn font-bold hover:bg-gray-300 hover:text-black rounded-2xl">
+               <button className="bg-primary   btn font-bold hover:bg-secondary  hover:text-white rounded-2xl">
                 Track your parcel{" "}
               </button>
-              <FaArrowCircleUp size={35}className="rotate-45" />
+              <FaArrowCircleUp size={35} className="rotate-45" />
             </div>
-            <button className="btn hover:bg-primary bg-gray-300 font-bold rounded-2xl">
+              <button className="btn hover:bg-secondary hover:text-white bg-gray-300 font-bold rounded-2xl">
               Ba A Rider
             </button>
           </div>
         </div>
-        <div>
+        <div className="relative">
           <img src={banner2} />
-          <p className="legend">Legend 2</p>
+          <div className="bottom-20 flex gap-6 absolute left-20">
+            <div className="flex items-center">
+              {" "}
+              <button className="bg-primary   btn font-bold hover:bg-secondary  hover:text-white rounded-2xl">
+                Track your parcel{" "}
+              </button>
+              <FaArrowCircleUp size={35} className="rotate-45" />
+            </div>
+            <button className="btn hover:bg-secondary hover:text-white bg-gray-300 font-bold rounded-2xl">
+              Ba A Rider
+            </button>
+          </div>
         </div>
-        <div>
+        <div className="relative">
           <img src={banner3} />
-          <p className="legend">Legend 3</p>
+          <div className="bottom-20 flex gap-6 absolute left-20">
+            <div className="flex items-center">
+              {" "}
+               <button className="bg-primary   btn font-bold hover:bg-secondary  hover:text-white rounded-2xl">
+                Track your parcel{" "}
+              </button>
+              <FaArrowCircleUp size={35} className="rotate-45" />
+            </div>
+              <button className="btn hover:bg-secondary hover:text-white bg-gray-300 font-bold rounded-2xl">
+              Ba A Rider
+            </button>
+          </div>
         </div>
       </Carousel>
     </div>

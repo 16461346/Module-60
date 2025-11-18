@@ -5,6 +5,10 @@ import OurServices from "../../Components/OurService/OurServices";
 import WorkedPlace from "../../Components/WorkCompany/WorkedPlace";
 import Delevary from "../../Components/Delevary/Delevary";
 import Priority from "../../Components/Priority/Priority";
+import Review from "./Reviews/Review";
+
+const reviewPromise= fetch('/reviews.json')
+.then(res=>res.json())
 
 const Home = () => {
   return (
@@ -17,6 +21,7 @@ const Home = () => {
       <WorkedPlace/>
       <Delevary/>
       <Priority/>
+      <Review reviewPromise={reviewPromise}/>
     </div>
   );
 };
