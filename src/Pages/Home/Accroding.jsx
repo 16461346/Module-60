@@ -15,7 +15,7 @@ const Accroding = () => {
       </div>
       <div className="my-10 flex flex-col gap-2">
         <div className="collapse hover:bg-cyan-100   collapse-arrow bg-gray-200 border border-base-300">
-          <input type="radio" name="my-accordion-2" defaultChecked />
+          <input type="checkbox" name="my-accordion-2" defaultChecked />
           <div className="collapse-title text-secondary text-xl font-semibold">
             How do I create an account?
           </div>
@@ -28,7 +28,7 @@ const Accroding = () => {
           </div>
         </div>
         <div className="collapse hover:bg-cyan-100  collapse-arrow bg-gray-200 border border-base-300">
-          <input type="radio" name="my-accordion-2" />
+          <input type="checkbox" name="my-accordion-2" />
           <div className="collapse-title text-xl  text-secondary font-semibold">
             I forgot my password. What should I do?
           </div>
@@ -37,7 +37,7 @@ const Accroding = () => {
           </div>
         </div>
         <div className="collapse collapse-arrow hover:bg-cyan-100 bg-gray-200 border border-base-300">
-          <input type="radio" name="my-accordion-2" />
+          <input type="checkbox" name="my-accordion-2" />
           <div className="collapse-title text-xl text-secondary font-semibold">
             How do I update my profile information?
           </div>
