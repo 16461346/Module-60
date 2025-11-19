@@ -6,6 +6,10 @@ import Covareg from "../Pages/Covaregs/Covareg";
 import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/AuthPages/Login/Login";
 import Register from "../Pages/AuthPages/Register/Register";
+import PrivetRoute from "./PrivetRoute";
+import Rider from "../Pages/Rider/Rider";
+import SendParcel from "../Pages/SendParcel/SendParcel";
+import Aboute from "../Pages/Aboute/Aboute";
 
 export const router = createBrowserRouter([
   {
@@ -14,31 +18,52 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home/>
+        element: <Home />,
       },
       {
-        path:'/services',
-        element:<Services/>
+        path: "/services",
+        element: <Services />,
       },
       {
-        path:'/coverage',
-        element:<Covareg/>,
-        loader: ()=>fetch('/serviceCenter.json').then(res=>res.json())
-      }
+        path: "/rider",
+        element: (
+          <PrivetRoute>
+            <Rider></Rider>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/coverage",
+        element: <Covareg />,
+        loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
+      },
+      {
+        path: "/sendParsel",
+        element: (
+          <PrivetRoute>
+            <SendParcel />
+          </PrivetRoute>
+        ),
+         loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
+      },
+      {
+        path:'aboute',
+        element:<Aboute/>
+      },
     ],
   },
   {
-    path: '/',
-    element:<AuthLayout/>,
-    children:[
-        {
-          path: 'login',
-          element:<Login/>
-        },
-        {
-          path: 'register',
-          element:<Register/>
-        }
-    ]
-  }
+    path: "/",
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+    ],
+  },
 ]);

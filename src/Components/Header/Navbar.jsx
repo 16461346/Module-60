@@ -1,15 +1,61 @@
 import React from "react";
 import Logo from "../Logo/Logo";
 import { NavLink } from "react-router";
+import useAuth from "../../Firebase/Hooks/useAuth";
 
 const Navbar = () => {
+  const { user,logOut } = useAuth();
+
+  const handleLogOut=()=>{
+    logOut()
+    .then(resust=>{
+      console.log(resust)
+    })
+    .catch(erre=>{
+      console.log(erre)
+    })
+  }
+
   const links = (
     <>
       <li>
-        <NavLink to={"/services"}>Srvices</NavLink>
+        <NavLink
+          to="/services"
+          className={
+            ({ isActive }) =>
+              isActive
+                ? "bg-primary font-bold" // Active link style
+                : "" // Normal style
+          }
+        >
+          Services
+        </NavLink>
       </li>
       <li>
-        <NavLink>Aboute</NavLink>
+        <NavLink
+          to="/sendParsel"
+          className={
+            ({ isActive }) =>
+              isActive
+                ? "bg-primary font-bold" // Active link style
+                : "" // Normal style
+          }
+        >
+          Send Parsel
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/aboute"
+          className={
+            ({ isActive }) =>
+              isActive
+                ? "bg-primary font-bold" // Active link style
+                : "" // Normal style
+          }
+        >
+         Aboute
+        </NavLink>
       </li>
       <li>
         <NavLink
@@ -17,8 +63,8 @@ const Navbar = () => {
           className={
             ({ isActive }) =>
               isActive
-                ? " underline" // Active link style
-                : "block px-4 py-2 text-black rounded hover:bg-gray-200" // Normal style
+                ? "bg-primary font-bold" // Active link style
+                : "" // Normal style
           }
         >
           Coverage
@@ -28,7 +74,7 @@ const Navbar = () => {
   );
 
   return (
-    <div>
+    <div className="sticky top-0 z-50 bg-white shadow-xl">
       <div class="navbar  bg-base-100 shadow-sm">
         <div class="navbar-start">
           <div class="dropdown">
@@ -56,15 +102,22 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a class="text-xl">
+          <NavLink to={'/'} class="text-xl">
             <Logo />
-          </a>
+          </NavLink>
         </div>
         <div class="navbar-center hidden lg:flex">
-          <ul class="menu menu-horizontal gap-4 px-1">{links}</ul>
+          <ul class="menu menu-horizontal gap-6 px-1">{links}</ul>
         </div>
-        <div class="navbar-end">
-          <a class="btn">Button</a>
+        <div class="navbar-end flex gap-4">
+          {user ? (
+            <button onClick={handleLogOut} class="btn">Log Out</button>
+          ) : (
+            <NavLink className={'btn'} to={"/login"} class="btn">
+              Login
+            </NavLink>
+          )}
+          <NavLink className={'btn bg-primary '} to={'/rider'}>Be a Rider </NavLink>
         </div>
       </div>
     </div>
