@@ -13,6 +13,8 @@ const Register = () => {
   };
   return (
     <div className="w-100 pl-20">
+      <h3 className="text-2xl text-center text-secondary font-semibold">Wellcome Back</h3>
+      <p className="font-bold pt-4 text-secondary">Please Login</p>
       <form onSubmit={handleSubmit(handleRegister)}>
         <fieldset className="fieldset">
           <label className="label">Email</label>
