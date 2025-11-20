@@ -48,7 +48,8 @@ export const router = createBrowserRouter([
       },
       {
         path:'aboute',
-        element:<Aboute/>
+        element:<Aboute/>,
+        loader:()=> fetch("/serviceCenter.json").then(res=>res.json()),
       },
     ],
   },

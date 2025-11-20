@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
 
 const SendParcel = () => {
   const {
@@ -22,10 +23,48 @@ const SendParcel = () => {
     return districts;
   };
   const reciverRegion = useWatch({ control, name: "reciverRegion" });
-  const senderRegion=useWatch({control,name: 'senderRegion'})
+  const senderRegion = useWatch({ control, name: "senderRegion" });
 
   const handleSendParcel = (data) => {
     console.log(data);
+    const isDocument = data.parcelType === "document";
+    const isSameDistrict = data.senderDistrict === data.receiverDistrict;
+    const parcelWeight = parseFloat(data.parcelWeight);
+    console.log(isSameDistrict, isDocument, parcelWeight);
+
+    let cost = 0;
+    if (isDocument) {
+      cost = isSameDistrict ? 60 : 80;
+    } else {
+      if (parcelWeight < 3) {
+        cost = isSameDistrict ? 110 : 150;
+      } else {
+        const minCharge = isSameDistrict ? 110 : 150;
+        const extraWeight = parcelWeight - 3;
+        const extraCharge = isSameDistrict
+          ? extraWeight * 40
+          : extraWeight * 40 + 40;
+        cost = minCharge + extraCharge;
+      }
+    }
+    console.log("cost", cost);
+    Swal.fire({
+      title: `Aggree with the cost ${cost} taka?`,
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Confirm it !",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   return (
@@ -135,7 +174,7 @@ const SendParcel = () => {
                   </select>
                 </div>
 
-                {/*Sender Region*/}
+                {/*Sender District*/}
                 <div>
                   <label className="label">Sender District</label>
                   <select
@@ -146,9 +185,11 @@ const SendParcel = () => {
                     <option value="" disabled>
                       Select Sender District
                     </option>
-                    {
-                      districtByRegion(senderRegion).map((distric,i)=><option key={i} value={distric}>{distric}</option>)
-                    }
+                    {districtByRegion(senderRegion).map((distric, i) => (
+                      <option key={i} value={distric}>
+                        {distric}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -204,7 +245,7 @@ const SendParcel = () => {
                   />
                 </div>
 
-                {/*Reciver Dristric */}
+                {/*Reciver Region */}
                 <div>
                   <label className="label">Reciver Region</label>
                   <select
@@ -227,11 +268,11 @@ const SendParcel = () => {
                   <label className="label">Reciver Districts</label>
                   <select
                     defaultValue=""
-                    {...register("reciverDistrict")}
+                    {...register("receiverDistrict")}
                     className="select select-bordered w-full"
                   >
                     <option value="" disabled>
-                      Select Reciver District
+                      Select Receiver District
                     </option>
                     {districtByRegion(reciverRegion).map((r, i) => (
                       <option key={i} value={r}>
