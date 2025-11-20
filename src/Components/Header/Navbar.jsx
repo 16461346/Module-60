@@ -70,6 +70,21 @@ const Navbar = () => {
           Coverage
         </NavLink>
       </li>
+      {
+        user?  <li>
+        <NavLink
+          to="/deshboard/my-parcels"
+          className={
+            ({ isActive }) =>
+              isActive
+                ? "bg-primary font-bold" // Active link style
+                : "" // Normal style
+          }
+        >
+          My-Parcels
+        </NavLink>
+      </li>:''
+      }
     </>
   );
 

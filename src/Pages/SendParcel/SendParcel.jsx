@@ -2,6 +2,9 @@ import React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Firebase/Hooks/useAxiosSecure";
+import useAuth from "../../Firebase/Hooks/useAuth";
+
 
 const SendParcel = () => {
   const {
@@ -10,6 +13,9 @@ const SendParcel = () => {
     control,
     formState: { errors },
   } = useForm();
+  const {user}=useAuth();
+
+  const axiosSecure=useAxiosSecure();
 
   const SCenters = useLoaderData();
   const regionDuplicate = SCenters.map((c) => c.region);
@@ -58,11 +64,15 @@ const SendParcel = () => {
       confirmButtonText: "Yes, Confirm it !",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
+        axiosSecure.post('/parcels',data)
+        .then(res=>{
+          console.log('data after post',res.data)
+        })
+        // Swal.fire({
+        //   title: "Deleted!",
+        //   text: "Your file has been deleted.",
+        //   icon: "success",
+        // });
       }
     });
   };
@@ -138,6 +148,7 @@ const SendParcel = () => {
                 <div>
                   <label className="label">Sender Name</label>
                   <input
+                    defaultValue  ={user?.displayName}
                     type="text"
                     {...register("senderName")}
                     className="input w-full"
@@ -149,6 +160,7 @@ const SendParcel = () => {
                   <label className="label">Sender Email</label>
                   <input
                     type="email"
+                    defaultValue={user?.email}
                     {...register("senderEmail")}
                     className="input w-full"
                     placeholder="Sender email here"

@@ -10,6 +10,8 @@ import PrivetRoute from "./PrivetRoute";
 import Rider from "../Pages/Rider/Rider";
 import SendParcel from "../Pages/SendParcel/SendParcel";
 import Aboute from "../Pages/Aboute/Aboute";
+import DashboraLayout from "../Layouts/DashboraLayout";
+import MyParcels from "../Pages/Dashboard/MyParcels";
 
 export const router = createBrowserRouter([
   {
@@ -44,12 +46,12 @@ export const router = createBrowserRouter([
             <SendParcel />
           </PrivetRoute>
         ),
-         loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
+        loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
       },
       {
-        path:'aboute',
-        element:<Aboute/>,
-        loader:()=> fetch("/serviceCenter.json").then(res=>res.json()),
+        path: "aboute",
+        element: <Aboute />,
+        loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
       },
     ],
   },
@@ -66,5 +68,19 @@ export const router = createBrowserRouter([
         element: <Register />,
       },
     ],
+  },
+  {
+    path: "deshboard",
+    element: (
+      <PrivetRoute>
+        <DashboraLayout></DashboraLayout>
+      </PrivetRoute>
+    ),
+    children:[
+      {
+        path:'my-parcels',
+        element:<MyParcels/>
+      }
+    ]
   },
 ]);
